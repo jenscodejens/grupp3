@@ -1,16 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import recipes from "../data/recipes.json";
+import { getRecipeById } from "../api";
 
-function RecipeDetail({ recipe: propRecipe }) {
+function RecipeDetail() {
   const { id } = useParams();
-  const recipe = propRecipe || recipes.find(r => r._id === id);
+  const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [rating, setRating] = useState(recipe?.avgRating || 0);
+  const [rating, setRating] = useState(0);
   const [userRating, setUserRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  const [comments, setComments] = useState(recipe?.comments || []);
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
+
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      try {
+        const response = await getRecipeById(id);
+        const fetchedRecipe = response.data;
+        setRecipe(fetchedRecipe);
+        setRating(fetchedRecipe.avgRating || 0);
+        setComments(fetchedRecipe.comments || []);
+      } catch (err) {
+        setError('Failed to load recipe');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchRecipe();
+    }
+  }, [id]);
 
   const handleRate = (rate) => {
     setUserRating(rate);
@@ -26,6 +49,8 @@ function RecipeDetail({ recipe: propRecipe }) {
     }
   };
 
+  if (loading) return <div className="container mt-4"><p>Loading recipe...</p></div>;
+  if (error) return <div className="container mt-4"><p>{error}</p></div>;
   if (!recipe) return <div className="container mt-4"><p>Receptet hittades inte.</p></div>;
 
   return (
@@ -40,6 +65,7 @@ function RecipeDetail({ recipe: propRecipe }) {
       />
       <p className="mb-2"><strong>Kategorier:</strong> {recipe.categories.join(", ")}</p>
       <p className="mb-2"><strong>Tid:</strong> {recipe.timeInMins} min</p>
+      <p className="mb-2"><strong>Pris:</strong> {recipe.price ? `${recipe.price} kr` : 'N/A'}</p>
       <p className="mb-4"><strong>Betyg:</strong> {rating.toFixed(1)} / 5</p>
       <h4 className="mt-4 mb-3">Ingredienser:</h4>
       <ul className="list-group mb-3">

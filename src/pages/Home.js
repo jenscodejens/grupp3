@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import recipes from "../data/recipes.json";
+import { getRecipes } from "../api";
 
 function Home() {
+  const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await getRecipes();
+        setRecipes(response.data);
+      } catch (err) {
+        setError('Failed to load recipes');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecipes();
+  }, []);
+
+  if (loading) return <div className="container mt-4"><p>Loading recipes...</p></div>;
+  if (error) return <div className="container mt-4"><p>{error}</p></div>;
+
   return (
     <div className="container mt-4">
       <h1 className="mb-4">Indiska Julrecept!</h1>

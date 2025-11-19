@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Categories from "./pages/Categories";
 import RecipeDetail from "./pages/RecipeDetail";
+import Swagger from "./pages/Swagger";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <div className="navbar-nav">
             <Link className="nav-link" to="/">Hem</Link>
             <Link className="nav-link" to="/kategorier">Kategorier</Link>
+            <Link className="nav-link" to="/swagger">API Docs</Link>
           </div>
         </div>
       </nav>
@@ -21,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/kategorier" element={<Categories />} />
         <Route path="/recept/:id" element={<RecipeDetail />} />
+        <Route path="/swagger" element={<Swagger />} />
       </Routes>
     </Router>
   );
