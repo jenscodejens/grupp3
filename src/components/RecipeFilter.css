@@ -1,0 +1,34 @@
+.recipe-filter {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: lightgrey;
+  padding: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.recipe-filter .btn {
+  width: 140px;
+  margin-right: 20px;
+}
+
+.recipe-filter .btn:last-child {
+  margin-right: 0;
+}
+
+.recipe-filter .btn-light:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.recipe-filter .btn-secondary:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.recipe-filter .btn-outline-secondary:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
