@@ -62,8 +62,10 @@ function RecipeDetail() {
         alt={recipe.title}
         className="img-fluid rounded mb-3"
         style={{ height: '200px', objectFit: 'cover' }}
+        onError={(e) => e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png'}
       />
-      <p className="mb-2"><strong>Kategorier:</strong> {recipe.categories.join(", ")}</p>
+      <p className="mb-2"><strong>Debug_id:</strong> {recipe._id}</p>
+      <p className="mb-2"><strong>Kategori:</strong> {recipe.categories}</p>
       <p className="mb-2"><strong>Tid:</strong> {recipe.timeInMins} min</p>
       <p className="mb-2"><strong>Pris:</strong> {recipe.price ? `${recipe.price} kr` : 'N/A'}</p>
       <p className="mb-4"><strong>Betyg:</strong> {rating.toFixed(1)} / 5</p>
