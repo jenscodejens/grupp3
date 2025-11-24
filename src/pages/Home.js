@@ -36,17 +36,19 @@ function Home() {
   });
 
   return (
-    <div className="container mt-4">
-      <h1 className="mb-4 text-center">Indiska Julrecept!</h1>
-      <p className="mb-4 text-center">
-        Upptäck Traditionella Indiska Julrecept!
-      </p>
-      <br></br>
-      <br></br>
-      <RecipeFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-      <div className="row">
+    <div className="mt-4">
+      <div className="container">
+        <h1 className="mb-4 text-center">Indiska Julrecept!</h1>
+        <p className="mb-4 text-center">
+          Upptäck Traditionella Indiska Julrecept!
+        </p>
+        <br></br>
+        <br></br>
+        <RecipeFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      </div>
+      <div className="recipe-grid">
         {filteredRecipes.map(recipe => (
-          <div key={recipe._id} className="col-md-4 mb-4">
+          <div key={recipe._id} className="recipe-card">
             <Link to={`/recept/${recipe._id}`} className="text-decoration-none">
               <div className="card h-100">
                 <img
