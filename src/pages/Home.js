@@ -31,7 +31,7 @@ function Home() {
 
   const filteredRecipes = recipes.filter(recipe => {
     const matchesCategory = !selectedCategory || recipe.categories.includes(selectedCategory);
-    const matchesSearch = !searchTerm || recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = !searchTerm || (recipe.title?.toLowerCase() || '').includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
