@@ -14,7 +14,7 @@ function App() {
           <Link className="navbar-brand" to="/">Grupp3</Link>
           <div className="navbar-nav">
             <Link className="nav-link" to="/">Hem</Link>
-            <Link className="nav-link" to="/kategorier">Kategorier</Link>
+            
             <Link className="nav-link" to="/swagger">API Docs</Link>
           </div>
         </div>

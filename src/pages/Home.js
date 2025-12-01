@@ -60,7 +60,7 @@ function Home() {
                 />
                 <div className="card-body">
                   <h5 className="card-title">{recipe.title}</h5>
-                  <p className="card-text"><strong>Debug_id:</strong> {recipe._id}</p>
+                  
                   <p className="card-text">{recipe.description}</p>
                   <p className="card-text"><strong>Kategori:</strong> {recipe.categories}</p>
                   <p className="card-text"><strong>Tid:</strong> {recipe.timeInMins} min</p>
