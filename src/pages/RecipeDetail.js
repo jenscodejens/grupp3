@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getRecipeById } from "../api";
+import { getRecipeById, addRating } from "../api";
 
+// Component for displaying detailed view of a single recipe
 function RecipeDetail() {
   const { id } = useParams();
+  // State for recipe data, loading, and error handling
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // State for rating functionality
   const [rating, setRating] = useState(0);
   const [userRating, setUserRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
-
-  useEffect(() => {
+  // State for comments
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState('');
+  
+    // Fetch recipe data when component mounts or id changes
+    useEffect(() => {
     const fetchRecipe = async () => {
       try {
         const response = await getRecipeById(id);
@@ -35,10 +40,14 @@ function RecipeDetail() {
     }
   }, [id]);
 
-  const handleRate = (rate) => {
-    setUserRating(rate);
-    setRating((rating + rate) / 2);
-    alert("Tack för din röst!");
+  const handleRate = async (rate) => {
+    try {
+      await addRating(id, rate);
+      setUserRating(rate);
+      alert("Tack för din röst!");
+    } catch (error) {
+      alert("Failed to submit rating");
+    }
   };
 
   const handleAddComment = () => {
@@ -64,7 +73,7 @@ function RecipeDetail() {
         style={{ height: '200px', objectFit: 'cover' }}
         onError={(e) => e.target.src = 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png'}
       />
-      <p className="mb-2"><strong>Debug_id:</strong> {recipe._id}</p>
+{/*       <p className="mb-2"><strong>Debug_id:</strong> {recipe._id}</p> */}
       <p className="mb-2"><strong>Kategori:</strong> {recipe.categories}</p>
       <p className="mb-2"><strong>Tid:</strong> {recipe.timeInMins} min</p>
       <p className="mb-2"><strong>Pris:</strong> {recipe.price ? `${recipe.price} kr` : 'N/A'}</p>
