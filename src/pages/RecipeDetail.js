@@ -58,7 +58,7 @@ function RecipeDetail() {
   if (!recipe) return <div className="container mt-4"><p>Receptet hittades inte.</p></div>;
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4" style={{ maxWidth: '760px' }}>
       <h2 className="mb-3">{recipe.title}</h2>
       <p className="mb-3">{recipe.description}</p>
       <img

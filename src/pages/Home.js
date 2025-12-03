@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getRecipes } from "../api";
+import RecipeFilter from "../components/RecipeFilter";
 
 function Home() {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -26,15 +29,26 @@ function Home() {
   if (loading) return <div className="container mt-4"><p>Loading recipes...</p></div>;
   if (error) return <div className="container mt-4"><p>{error}</p></div>;
 
+  const filteredRecipes = recipes.filter(recipe => {
+    const matchesCategory = !selectedCategory || recipe.categories.includes(selectedCategory);
+    const matchesSearch = !searchTerm || (recipe.title?.toLowerCase() || '').includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
   return (
-    <div className="container mt-4">
-      <h1 className="mb-4">Indiska Julrecept!</h1>
-      <p className="mb-4">
-        Upptäck Traditionella Indiska Julrecept!
-      </p>
-      <div className="row">
-        {recipes.map(recipe => (
-          <div key={recipe._id} className="col-md-4 mb-4">
+    <div className="mt-4">
+      <div className="container">
+        <h1 className="mb-4 text-center">Indiska Julrecept!</h1>
+        <p className="mb-4 text-center">
+          Upptäck Traditionella Indiska Julrecept!
+        </p>
+        <br></br>
+        <br></br>
+        <RecipeFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      </div>
+      <div className="recipe-grid">
+        {filteredRecipes.map(recipe => (
+          <div key={recipe._id} className="recipe-card">
             <Link to={`/recept/${recipe._id}`} className="text-decoration-none">
               <div className="card h-100">
                 <img

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getRecipes } from "../api";
+import RecipeFilter from "../components/RecipeFilter";
 
 const categories = ["Vegetariskt", "Kött", "Fisk", "Kyckling", "Dessert"];
 
@@ -31,6 +32,7 @@ function Categories() {
   return (
     <div className="container mt-4">
       <h2 className="mb-4">Kategorier</h2>
+      <RecipeFilter />
       {categories.map(cat => (
         <div key={cat} className="mb-5">
           <h3 className="mb-3">{cat}</h3>
