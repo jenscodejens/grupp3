@@ -9,3 +9,5 @@ export const createRecipe = (recipeData) => apiClient.post('/recipes', recipeDat
 export const updateRecipe = (id, recipeData) => apiClient.put(`/recipes/${id}`, recipeData);
 
 export const deleteRecipe = (id) => apiClient.delete(`/recipes/${id}`);
+
+export const addRating = (id, rating) => apiClient.post(`/recipes/${id}/ratings`, { rating });

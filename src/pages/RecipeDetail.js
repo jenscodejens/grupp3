@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getRecipeById } from "../api";
+import { getRecipeById, addRating } from "../api";
 
 function RecipeDetail() {
   const { id } = useParams();
@@ -35,10 +35,14 @@ function RecipeDetail() {
     }
   }, [id]);
 
-  const handleRate = (rate) => {
-    setUserRating(rate);
-    setRating((rating + rate) / 2);
-    alert("Tack för din röst!");
+  const handleRate = async (rate) => {
+    try {
+      await addRating(id, rate);
+      setUserRating(rate);
+      alert("Tack för din röst!");
+    } catch (error) {
+      alert("Failed to submit rating");
+    }
   };
 
   const handleAddComment = () => {
