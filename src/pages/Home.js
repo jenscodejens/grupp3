@@ -1,7 +1,10 @@
+// src/pages/Home.jsx
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getRecipes } from "../api";
 import RecipeFilter from "../components/RecipeFilter";
+
 
 function Home() {
   const [recipes, setRecipes] = useState([]);
@@ -36,16 +39,21 @@ function Home() {
   });
 
   return (
-    <div className="mt-4">
+    <div className="home mt-4">
       <div className="container">
         <h1 className="mb-4 text-center">Indiska Julrecept!</h1>
         <p className="mb-4 text-center">
           Upptäck Traditionella Indiska Julrecept!
         </p>
-        <br></br>
-        <br></br>
-        <RecipeFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+
+        <RecipeFilter 
+          selectedCategory={selectedCategory} 
+          onCategoryChange={setSelectedCategory} 
+          searchTerm={searchTerm} 
+          onSearchChange={setSearchTerm} 
+        />
       </div>
+
       <div className="recipe-grid">
         {filteredRecipes.map(recipe => (
           <div key={recipe._id} className="recipe-card">
@@ -60,7 +68,6 @@ function Home() {
                 />
                 <div className="card-body">
                   <h5 className="card-title">{recipe.title}</h5>
-                  
                   <p className="card-text">{recipe.description}</p>
                   <p className="card-text"><strong>Kategori:</strong> {recipe.categories}</p>
                   <p className="card-text"><strong>Tid:</strong> {recipe.timeInMins} min</p>
