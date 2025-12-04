@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import apiClient from "../api/base";
 
+// Component for displaying detailed view of a single recipe
 function RecipeDetail() {
   const { id } = useParams();
 

@@ -1,19 +1,24 @@
 // src/pages/Home.jsx
 
+// src/pages/Home.jsx
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getRecipes } from "../api";
 import RecipeFilter from "../components/RecipeFilter";
 
 
+// Home component displaying list of recipes with filtering
 function Home() {
-  const [recipes, setRecipes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  useEffect(() => {
+  // State for recipes data, loading, error, and filter options
+    const [recipes, setRecipes] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
+  
+    // Fetch recipes when component mounts
+    useEffect(() => {
     const fetchRecipes = async () => {
       try {
         const response = await getRecipes();
@@ -68,10 +73,11 @@ function Home() {
                 />
                 <div className="card-body">
                   <h5 className="card-title">{recipe.title}</h5>
+                  
                   <p className="card-text">{recipe.description}</p>
                   <p className="card-text"><strong>Kategori:</strong> {recipe.categories}</p>
                   <p className="card-text"><strong>Tid:</strong> {recipe.timeInMins} min</p>
-                  <p className="card-text"><strong>Betyg:</strong> {recipe.avgRating || 'N/A'} / 5</p>
+                  <p className="card-text"><strong>Betyg:</strong> {recipe.avgRating ? recipe.avgRating.toFixed(1) : 'N/A'} / 5</p>
                   <h6>Ingredienser:</h6>
                   <ul className="list-unstyled">
                     {recipe.ingredients.slice(0, 3).map((ing, idx) => (

@@ -6,6 +6,7 @@ import RecipeDetail from "./pages/RecipeDetail";
 import Swagger from "./pages/Swagger";
 import "./App.css";
 
+// Main App component that sets up routing and navigation for the application
 function App() {
   return (
     <Router>
@@ -21,7 +22,6 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/kategorier" element={<Categories />} />
         <Route path="/recept/:id" element={<RecipeDetail />} />
         <Route path="/swagger" element={<Swagger />} />
       </Routes>
