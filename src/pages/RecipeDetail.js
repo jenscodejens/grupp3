@@ -127,7 +127,7 @@ function RecipeDetail() {
               : recipe.categories || "Ingen kategori"}
             <br />
             <strong>Tid:</strong> {recipe.timeInMins || "N/A"} min <br />
-            <strong>Betyg:</strong> {recipe.avgRating?.toFixed(1) || "N/A"} / 5
+            <strong>Betyg:</strong> {recipe.avgRating != null ? Math.round(recipe.avgRating) : "N/A"} / 5
           </div>
 
           {/* Ingredients */}

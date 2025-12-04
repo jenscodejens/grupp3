@@ -71,7 +71,7 @@ function Home() {
                   <p className="card-text">{recipe.description}</p>
                   <p className="card-text"><strong>Kategori:</strong> {recipe.categories}</p>
                   <p className="card-text"><strong>Tid:</strong> {recipe.timeInMins} min</p>
-                  <p className="card-text"><strong>Betyg:</strong> {recipe.avgRating || 'N/A'} / 5</p>
+                  <p className="card-text"><strong>Betyg:</strong> {recipe.avgRating != null ? Number(recipe.avgRating).toFixed(1) : "N/A"} / 5 </p>
                   <h6>Ingredienser:</h6>
                   <ul className="list-unstyled">
                     {recipe.ingredients.slice(0, 3).map((ing, idx) => (
