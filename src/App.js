@@ -13,8 +13,8 @@ function App() {
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">Grupp3</Link>
           <div className="navbar-nav">
-            <Link className="nav-link" to="/">Hem</Link>
-            
+            <a className="nav-link" href="/">Hem</a>
+
             <Link className="nav-link" to="/swagger">API Docs</Link>
           </div>
         </div>
